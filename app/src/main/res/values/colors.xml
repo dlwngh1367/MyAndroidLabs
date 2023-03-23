@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="my_primary">#5D4080</color>
-    <color name="my_secondary">#4988BA</color>
-    <color name="my_statusbar">#864C8F</color>
+    <color name="my_primary">#B4C10E0E</color>
+    <color name="Primary">#DAB8AD</color>
+    <color name="my_secondary">#1BC5BF</color>
+    <color name="Secondary">#95C3C1</color>
+    <color name="my_statusbar">#686363</color>
+    <color name="Statusbar">#3A3838</color>
+    <color name="my_text">#181819</color>
+    <color name="purple_200">#BFD582D5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="my_text">#A86A57</color>
 </resources>

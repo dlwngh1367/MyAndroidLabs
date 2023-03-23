@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ChatMessage{
 	@PrimaryKey(autoGenerate=true)
 	@ColumnInfo(name="id")
-	public int id;
+	public long id;
 
 
 	@ColumnInfo(name="message")
