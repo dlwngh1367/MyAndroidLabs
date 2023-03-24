@@ -1,9 +1,13 @@
 package algonquin.cst2335.lee00824;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,8 +27,6 @@ import java.util.concurrent.Executors;
 import algonquin.cst2335.lee00824.databinding.ActivityChatRoomBinding;
 import algonquin.cst2335.lee00824.databinding.ReceiveMessageBinding;
 import algonquin.cst2335.lee00824.databinding.SentMessageBinding;
-import algonquin.cst2335.lee00824.ChatRoomViewModel;
-import algonquin.cst2335.lee00824.ChatMessage;
 
 public class ChatRoom extends AppCompatActivity {
 
@@ -46,7 +46,52 @@ public class ChatRoom extends AppCompatActivity {
     Executor thread = Executors.newSingleThreadExecutor();
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch( item.getItemId() )
+        {
+            case R.id.item_1:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure you want to delete this message?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        for (int i = 0; i < messages.size(); i++) {
+                            ChatMessage chat = messages.get(i);
+                            messages.remove(chat);
+                            thread.execute(() -> {
+                                mDAO.deleteMessage(chat);
+                            });
+                            myAdapter.notifyItemRemoved(i);
+                        }}
+
+
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+                break;
+
+            case R.id.item_2:
+                // display the about information
+                Toast.makeText(this, "Version 1.0, created Juho Lee", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
 
         MessageDatabase db = Room.databaseBuilder(getApplicationContext(),
@@ -192,6 +237,8 @@ public class ChatRoom extends AppCompatActivity {
             });
             messageText = itemView.findViewById(R.id.message);
             timeText = itemView.findViewById(R.id.time);
+            setSupportActionBar(binding.toolbar);
+
         };
     }
 }
