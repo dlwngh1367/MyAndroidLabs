@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Juho\'s Android Labs</string>
-    <string name="hello_message">안녕하세요!</string>
-    <string name="button_message">저는 버튼입니다</string>
+    <string name="hello_message">도시를 입력하세요</string>
+    <string name="button_message">날씨 검색</string>
+    <string name="edit_message">여기에 도시를 입력하세요</string>
 </resources>
